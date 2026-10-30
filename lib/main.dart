@@ -87,11 +87,11 @@ class _PokemonSearchScreenState extends State<PokemonSearchScreen> {
       final formattedName = pokemonName.trim().toLowerCase();
       final url = Uri.parse('https://pokeapi.co/api/v2/pokemon/$formattedName');
       
-      // Asynchronous HTTP GET request[cite: 13]
+      // Asynchronous HTTP GET request
       final response = await http.get(url);
 
       if (response.statusCode == 200) {
-        // Decode JSON response body into a Map[cite: 12]
+        // Decode JSON response body into a Map
         final decodedData = jsonDecode(response.body);
         
         if (decodedData is! Map<String, dynamic>) {
@@ -124,7 +124,8 @@ class _PokemonSearchScreenState extends State<PokemonSearchScreen> {
   @override
   void initState() {
     super.initState();
-    fetchPokemon('MANKEY');
+    // Load Seviper by default on app launch (Seviper ID is 336)
+    fetchPokemon('seviper');
   }
 
   @override
@@ -146,7 +147,7 @@ class _PokemonSearchScreenState extends State<PokemonSearchScreen> {
                   child: TextField(
                     controller: _controller,
                     decoration: const InputDecoration(
-                      labelText: 'Enter Pokémon Name (e.g. seviper, pikachu)',
+                      labelText: 'Enter Pokémon Name (e.g. seviper)',
                       border: OutlineInputBorder(),
                     ),
                     onSubmitted: (value) => fetchPokemon(value),
